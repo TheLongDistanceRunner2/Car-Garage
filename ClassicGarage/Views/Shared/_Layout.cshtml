@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title — Ludwisiak Marcin</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        body {
+            background-image: url('../../Content/Images/background1.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Classic Garage", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Advertisements", "Index", "AdvertismentModels", new { area = "" }, new { @class = "navbar-item" })</li>
+                    <li>@Html.ActionLink("Information", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <div class="dropdown">
+                                <button class="btn btn-primary" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Profile
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li>@Html.ActionLink("My profile", "Index", "OwnerModels", new { area = "" }, new { @class = "navbar-item" })</li>
+                                    <li>@Html.ActionLink("GARAGE", "MojeSamochody", "CarModels", new { area = "" }, new { @class = "navbar-item" })</li>
+                                    <li>@Html.ActionLink("My adverts", "MojeOgloszenia", "AdvertismentModels", new { area = "" }, new { @class = "navbar-item" })</li>
+                                    <li>@Html.ActionLink("My repairs", "Index", "RepairsModels", new { area = "" }, new { @class = "navbar-item" })</li>
+                                    <li>@Html.ActionLink("My parts", "Index", "PartsModels", new { area = "" }, new { @class = "navbar-item" })</li>
+
+                                </ul>
+                            </div>
+                        }
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year — Ludwisiak Marcin</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

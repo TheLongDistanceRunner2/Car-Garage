@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ClassicGarage.Models.RepairsModels>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Repairs";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Car.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.RepairPrice)*@
+            Repair Price
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Car.Owner.Email == User.Identity.GetUserName())
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RepairPrice)
+                </td>
+                @if (item.Car.Owner.Email == User.Identity.GetUserName())
+                {
+                    <td>
+
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Options
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Edit", "Edit", new { id = item.ID })</li>
+                                <li>@Html.ActionLink("Details", "Details", new { id = item.ID })</li>
+                                <li>@Html.ActionLink("Delete", "Delete", new { id = item.ID })</li>
+                            </ul>
+                        </div>
+                    </td>
+                }
+                else
+                {
+                    <td>
+
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Options
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Details", "Details", new { id = item.ID })</li>
+
+                            </ul>
+                        </div>
+                    </td>
+                }
+            </tr>
+        }
+    }
+
+</table>

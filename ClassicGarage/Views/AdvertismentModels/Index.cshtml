@@ -1,0 +1,132 @@
+﻿@model IEnumerable<ClassicGarage.Models.AdvertismentModels>
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Advertisements";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @if (Request.IsAuthenticated)
+    {
+        @Html.ActionLink("Add new advertisement!", "Create")
+    }
+    else
+    {
+
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Car.Picture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car.PurchaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalesAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalesDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car.Owner)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.Car.Owner.Email)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Active == true)
+        {
+    <tr>
+        <td>
+            <img src="@Url.Content(item.Car.Picture)" alt="" style="width:200px; height:200px;" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Car.Make)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Car.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Car.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Car.PurchaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalesAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalesDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Car.Owner.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Car.Owner.Email)
+        </td>
+
+        @if (item.Car.Owner.Email == User.Identity.GetUserName())
+        {
+            <td>
+
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Options
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Edit", "Edit", new { id = item.ID })</li>
+                        <li>@Html.ActionLink("Delete", "Delete", new { id = item.ID })</li>
+                        <li> @Html.ActionLink("Repairs", "Naprawy", "CarModels", new { id = item.CarId }, null)</li>
+                        <li>
+                            @Html.ActionLink("Parts", "Czesci", "CarModels", new { id = item.CarId }, null)
+                        </li>
+
+                    </ul>
+                </div>
+            </td>
+        }
+        else
+        {
+            <td>
+
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Options
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li> @Html.ActionLink("Repairs", "Naprawy", "CarModels", new { id = item.CarId }, null)</li>
+                        <li>
+                            @Html.ActionLink("Parts", "Czesci", "CarModels", new { id = item.CarId }, null)
+                        </li>
+
+                    </ul>
+                </div>
+            </td>
+        }
+
+    </tr>
+        }
+    }
+
+</table>

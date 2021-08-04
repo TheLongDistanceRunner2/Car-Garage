@@ -1,0 +1,69 @@
+﻿@model ClassicGarage.Models.CarModels
+
+@{
+    ViewBag.Title = "Parts";
+}
+
+<h2>Parts</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Make
+        </th>
+        <th>
+            Model
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Catalog Number
+        </th>
+        <th>
+            Purchase Amount
+        </th>
+        <th>
+            Sales Amount
+        </th>
+        <th>
+            Purchase Date
+        </th>
+        <th>
+            Sales Date
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.Part)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Car.Make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Car.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CatalogNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalesAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalesDate)
+            </td>
+
+
+        </tr>
+    }
+</table>
