@@ -1,5 +1,5 @@
-.Net browser application for buying and selling cars
+ASP.NET application for buying and selling cars
 
 ===================================================
 
-Aplikacja przeglądarkowa .Net do kupowania i sprzedawania samochodów
+Aplikacja ASP.NET do kupowania i sprzedawania samochodów
